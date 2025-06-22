@@ -30,7 +30,9 @@ A **production-grade PowerShell script** for Windows servers that backs up **all
 BasePath/
 
 -├── backups/ → \`.sql.zip\` backups per database
+
 -├── logs/ → One log file per run
+
 -└── auto-backup.ps1 → The script
 
 ---
