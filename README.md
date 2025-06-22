@@ -1,57 +1,61 @@
-A **production-ready PowerShell script** for Windows servers that automatically backs up **all MariaDB databases** (each in a separate .sql.zip), maintains clear logs, and rotates old backups — with a clean boot-style output inspired by Linux package managers.
+# 🚀 MariaDB Windows Auto Backup Script
 
-**📌 Features**
+A **production-grade PowerShell script** for Windows servers that backs up **all MariaDB databases individually**, compresses them, logs every step, and rotates old backups automatically — with a clean, boot-style status output inspired by Linux package managers.
 
-- ✅ One .sql.zip per database — clean & easy to restore
+---
+
+## 📌 Features
+
+- ✅ One `.sql.zip` per database — clean & easy to restore
 - ✅ Skips system databases automatically
-- ✅ Linux boot-style, color-coded output \[ OK \] \[ SKIP \] \[ FAIL \] \[ .... \]
+- ✅ Linux boot-style, color-coded output `[ OK ] [ SKIP ] [ FAIL ] [ .... ]`
 - ✅ Separate folders for **backups** and **logs**
 - ✅ Auto-creates missing folders
 - ✅ Deletes backups older than **X days**
 - ✅ Scheduler-friendly — run daily/hourly
 
-**⚙️ Requirements**
+---
+
+## ⚙️ Requirements
 
 - Windows Server or Windows 10+
-- MariaDB installed (mariadb.exe and mariadb-dump.exe in bin)
+- MariaDB installed (`mariadb.exe` and `mariadb-dump.exe` in `bin`)
 - PowerShell 5 or newer
 
-**📁 Folder Structure**
+---
+
+## 📁 Folder Structure
+
 
 BasePath/
 
-├── backups/ → \`.sql.zip\` backups per database
+-├── backups/ → \`.sql.zip\` backups per database
+-├── logs/ → One log file per run
+-└── auto-backup.ps1 → The script
 
-├── logs/ → One log file per run
+---
+## 🔧 Configuration
 
-└── auto-backup.ps1 → The script
+Open `auto-backup.ps1` and adjust:
 
-**🔧 Configuration**
+```powershell
+# Base folder for backups & logs:
+$BasePath   = "D:\backups\mariadb"
 
-Open auto-backup.ps1 and adjust:
+# MariaDB binaries:
+$MariaDBBin = "C:\Program Files\MariaDB 10.11\bin"
 
-\# Base folder for backups & logs:
-
-$BasePath = "D:\\backups\\mariadb"
-
-\# MariaDB binaries:
-
-$MariaDBBin = "C:\\Program Files\\MariaDB 10.11\\bin"
-
-\# MariaDB credentials:
-
+# MariaDB credentials:
 $User = "root"
-
 $Password = "YOUR_PASSWORD"
 
-\# Days to keep backups:
-
+# Days to keep backups:
 $RetentionDays = 7
-
-**🚀 How to Run Manually**
-
+```
+## 🚀 How to Run Manually
+```powershell
 powershell.exe -ExecutionPolicy Bypass -File "D:\\backups\\mariadb\\auto-backup.ps1"
-
+```
 Watch live \[ OK \] / \[ SKIP \] / \[ FAIL \] statuses and get a log in logs/.
 
 **🔁 Automate with Task Scheduler**
@@ -77,9 +81,9 @@ Use **Windows Task Scheduler** to run daily/hourly:
 **🔑 Restore Example**
 
 Unzip, then run:
-
+```powershell
 mariadb.exe -u root -p yourdb < yourdb-22_06_2025_12-00-00.sql
-
+```
 **📄 License**
 
 MIT License — free to use, modify, and share.
@@ -92,7 +96,7 @@ If you like this script, ⭐ star the repo and share it!
 
 **🔗 Useful**
 
-- MariaDB Docs
+- [MariaDB Docs](https://mariadb.com/docs/)
 - [Windows Task Scheduler](https://learn.microsoft.com/en-us/windows/win32/taskschd/task-scheduler-start-page)
 
 ✅ **Happy Backups — Clean Servers Forever!**
